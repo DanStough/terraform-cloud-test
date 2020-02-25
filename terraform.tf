@@ -1,14 +1,30 @@
 terraform {
-  required_version = "0.11.11"
+  backend "remote" {
+    organization = "mark-one"
+
+    workspaces {
+      name = "Example-Workspace"
+    }
+  }
 }
 
 provider "aws" {
   profile = "default"
-  region = "us-east-1"
+  region  = "us-east-1"
 }
 
-module "consul" {
-  source  = "hashicorp/consul/aws"
-  version = "0.7.3"
-  servers = 3
+resource "aws_instance" "example" {
+  ami           = "ami-b374d5a5"
+  instance_type = "t2.micro"
+  # vpc_security_group_ids = ["sg-0077..."]
+  # subnet_id = "subnet-923a..."
+}
+
+resource "aws_eip" "ip" {
+    vpc = true
+    instance = aws_instance.example.id
+}
+
+output "ami" {
+  value = aws_instance.example.ami
 }
