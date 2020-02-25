@@ -3,7 +3,7 @@ terraform {
     organization = "mark-one"
 
     workspaces {
-      name = "Example-Workspace"
+      name = "Example-Remote-Workspace"
     }
   }
 }
