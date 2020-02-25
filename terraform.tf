@@ -3,7 +3,7 @@ terraform {
     organization = "mark-one"
 
     workspaces {
-      name = "Example-Remote-Workspace"
+      name = "terraform-cloud-test"
     }
   }
 }
